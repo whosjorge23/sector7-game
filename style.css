@@ -1,0 +1,259 @@
+:root {
+    --color-bg: #050505;
+    --color-text-primary: #e0e0e0;
+    --color-text-dim: #888;
+    --color-accent: #00ff55;
+    --color-danger: #ff003c;
+    --color-terminal: #33ff00;
+
+    --font-primary: 'Courier Prime', monospace;
+    --font-ui: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: var(--font-primary);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CRT Effects */
+.crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%,
+            rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.scanline {
+    width: 100%;
+    height: 10px;
+    background: rgba(0, 255, 0, 0.05);
+    position: fixed;
+    z-index: 11;
+    pointer-events: none;
+    animation: scan 8s linear infinite;
+    top: -10%;
+}
+
+@keyframes scan {
+    0% {
+        top: -10%;
+    }
+
+    100% {
+        top: 110%;
+    }
+}
+
+/* Layout */
+.game-container {
+    width: 90%;
+    max-width: 800px;
+    height: 90vh;
+    border: 2px solid var(--color-text-dim);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+    background: rgba(10, 10, 10, 0.95);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-text-dim);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.game-header h1 {
+    font-size: 1.2rem;
+    color: var(--color-accent);
+    text-shadow: 0 0 5px var(--color-accent);
+}
+
+.status-indicators span {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    margin-left: 10px;
+}
+
+.pulse {
+    color: var(--color-terminal);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Viewport */
+.viewport {
+    flex-grow: 1;
+    position: relative;
+    background: #000;
+    border: 1px solid var(--color-text-dim);
+    margin-bottom: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.scene-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1s ease-in-out;
+    filter: grayscale(80%) contrast(120%);
+}
+
+.message-log {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    height: 100%;
+    overflow-y: auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.message-log p {
+    margin-bottom: 15px;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.typing-cursor::after {
+    content: '█';
+    animation: blink 1s infinite;
+    color: var(--color-accent);
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Controls */
+.choices-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 160px;
+    /* Approximately 3.5 buttons to make it look scrollable */
+    overflow-y: auto;
+    padding-right: 5px;
+    /* Space for scrollbar */
+}
+
+.choice-btn {
+    background: transparent;
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    padding: 12px 20px;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.choice-btn:hover {
+    background: var(--color-accent);
+    color: #000;
+    box-shadow: 0 0 10px var(--color-accent);
+}
+
+/* Footer */
+.game-footer {
+    margin-top: 20px;
+    border-top: 1px solid var(--color-text-dim);
+    padding-top: 10px;
+}
+
+.inventory-display {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+}
+
+#inventory-list {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.inventory-item {
+    color: var(--color-terminal);
+    border: 1px solid var(--color-terminal);
+    padding: 2px 6px;
+    font-size: 0.8rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-text-dim);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent);
+}

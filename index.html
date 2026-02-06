@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Vanishing of Unit 7</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="crt-overlay"></div>
+    <div class="scanline"></div>
+
+    <main class="game-container">
+        <header class="game-header">
+            <h1 id="game-title">SECTOR 7 // TERMINAL ACCESS</h1>
+            <div class="status-indicators">
+                <span class="pulse">CONNECTED</span>
+                <span id="time-display">00:00:00</span>
+            </div>
+        </header>
+
+        <section id="viewport" class="viewport">
+            <div id="scene-image" class="scene-background"></div>
+            <div class="message-log" id="message-log">
+                <!-- Text appears here -->
+            </div>
+        </section>
+
+        <section class="controls-area">
+            <div id="choices-container" class="choices-container">
+                <!-- Buttons will be injected here -->
+            </div>
+        </section>
+
+        <footer id="game-footer" class="game-footer">
+            <div class="inventory-display">
+                <span>INVENTORY:</span>
+                <ul id="inventory-list">
+                    <li class="empty-slot">EMPTY</li>
+                </ul>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Load Scenarios First (Data) -->
+    <script src="js/scenarios/main_menu.js"></script>
+    <script src="js/scenarios/unit7.js"></script>
+    <script src="js/scenarios/sector9.js"></script>
+    <script src="js/scenarios/lab_zero.js"></script>
+    <script src="js/scenarios/neon_market.js"></script>
+    <script src="js/scenarios/orbital_station.js"></script>
+    <script src="js/scenarios/ghost_signal.js"></script>
+    <script src="js/scenarios/neo_tokyo.js"></script>
+    <script src="js/scenarios/data_vault.js"></script>
+    <script src="js/scenarios/synthetic_forest.js"></script>
+    <script src="js/scenarios/zero_point.js"></script>
+
+    <!-- Load Engine -->
+    <script src="js/engine.js"></script>
+
+    <!-- Load Entry Point -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

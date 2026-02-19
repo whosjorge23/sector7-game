@@ -67,7 +67,7 @@ body {
 .game-container {
     width: 90%;
     max-width: 800px;
-    height: 90vh;
+    height: 80vh;
     border: 2px solid var(--color-text-dim);
     display: flex;
     flex-direction: column;
